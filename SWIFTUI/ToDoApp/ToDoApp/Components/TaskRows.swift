@@ -9,19 +9,19 @@ import SwiftUI
 
 
 struct TaskRows: View {
-    var task : String
-    var completed : Bool
+  @ObservedObject var taskViewModel : TaskViewModel  
     
     var body: some View {
         HStack(spacing: 20) {
-            Image(systemName: completed ? "checkmark.circle" : "circle")
-            Text(task)
+            Image(systemName: taskViewModel.completed ? "checkmark.circle" : "circle")
+            Text(taskViewModel.title)
+                .font(Font.custom("BrunoAceSC-Regular", size: 15))
         }
     }
 }
 
 struct TaskRows_Previews: PreviewProvider {
     static var previews: some View {
-        TaskRows(task: "Read Some Book", completed: true)
+        TaskRows(taskViewModel: TaskViewModel(task: Task()))
     }
 }

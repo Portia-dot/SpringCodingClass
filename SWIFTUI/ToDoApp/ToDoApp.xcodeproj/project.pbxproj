@@ -20,6 +20,8 @@
 		833386BA29F6E58D00251CEF /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 833386B929F6E58D00251CEF /* RealmSwift */; };
 		833386BC29F6E5D100251CEF /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833386BB29F6E5D100251CEF /* RealmManager.swift */; };
 		833386BE29F6E77D00251CEF /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833386BD29F6E77D00251CEF /* Task.swift */; };
+		833DF0F029F8A1B00030F921 /* taskViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 833DF0EF29F8A1B00030F921 /* taskViewModel.swift */; };
+		837BCF7F29F8794200A064D4 /* editTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 837BCF7E29F8794200A064D4 /* editTask.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,8 @@
 		833386B429F6E18F00251CEF /* addButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addButton.swift; sourceTree = "<group>"; };
 		833386BB29F6E5D100251CEF /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		833386BD29F6E77D00251CEF /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
+		833DF0EF29F8A1B00030F921 /* taskViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = taskViewModel.swift; sourceTree = "<group>"; };
+		837BCF7E29F8794200A064D4 /* editTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editTask.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 				8316C52D29F64FC000017638 /* Preview Content */,
 				833386BB29F6E5D100251CEF /* RealmManager.swift */,
 				833386BD29F6E77D00251CEF /* Task.swift */,
+				833DF0EF29F8A1B00030F921 /* taskViewModel.swift */,
 			);
 			path = ToDoApp;
 			sourceTree = "<group>";
@@ -95,6 +100,7 @@
 				8316C52929F64FBC00017638 /* ContentView.swift */,
 				8316C53929F651C700017638 /* TaskViews.swift */,
 				8316C54329F65B0B00017638 /* addTaskView.swift */,
+				837BCF7E29F8794200A064D4 /* editTask.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -201,7 +207,9 @@
 				833386B529F6E18F00251CEF /* addButton.swift in Sources */,
 				8316C53A29F651C700017638 /* TaskViews.swift in Sources */,
 				833386BC29F6E5D100251CEF /* RealmManager.swift in Sources */,
+				837BCF7F29F8794200A064D4 /* editTask.swift in Sources */,
 				8316C54229F6592800017638 /* TaskRows.swift in Sources */,
+				833DF0F029F8A1B00030F921 /* taskViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
