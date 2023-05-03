@@ -95,12 +95,128 @@ struct Home: View {
             .background{
                 Color(red: 0.44, green: 0.29, blue: 0.78).ignoresSafeArea()
             }
-        
-        //  NewSheet For Timer
-        @ViewBuilder
-        func 
+            .overlay {
+                ZStack{
+                    Color.black
+                        .opacity(timerModel.addNewTimer ? 0.25 : 0)
+                        .onTapGesture {
+                            timerModel.addNewTimer = false
+                        }
+                    
+                    NewTimerView()
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .offset(y: timerModel.addNewTimer ? 0 : 400)
+                }
+                .animation(.easeInOut, value: timerModel.addNewTimer)
+            }
+            .preferredColorScheme(.dark)
+        }
+    
+    
+    //  NewSheet For Timer
+    @ViewBuilder
+    func NewTimerView()->some View{
+        VStack(spacing: 15) {
+            Text("Add New Timer")
+                .font(.title2.bold())
+                .foregroundColor(.white)
+                .padding(.top, 10)
+            
+            HStack(spacing: 15) {
+                Text("\(timerModel.hour) hr")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white.opacity(0.3))
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background(Capsule().fill(Color.white.opacity(0.07)))
+                    .contextMenu {
+                        ContextMenuOption(maxValue: 12, hint: "hr") { value in
+                            timerModel.hour = value 
+                        }
+                    }
+                Text("\(timerModel.minutes) min")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white.opacity(0.3))
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background{
+                        Capsule()
+                            .fill(.white.opacity(0.07))
+                    }
+                    .contextMenu {
+                        ContextMenuOption(maxValue: 60, hint: "min") { value in
+                            timerModel.minutes = value
+                        }
+                    }
+
+                Text("\(timerModel.seconds) sec")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white.opacity(0.3))
+                    .padding(.vertical, 12)
+                    .padding(.horizontal, 20)
+                    .background{
+                        Capsule()
+                            .fill(.white.opacity(0.07))
+                    }
+                    .contextMenu {
+                        ContextMenuOption(maxValue: 60, hint: "sec") { value in
+                            timerModel.seconds = value
+                        }
+                    }
+
+            }
+            .padding(.top, 20)
+            
+            Button {
+                print("Button pressed")
+            } label: {
+                Text("Save")
+                    .font(.title3)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white)
+                    .padding(.vertical)
+                    .padding(.horizontal,100)
+                    .background{
+                        Capsule()
+                            .fill(Color(red: 0.55, green: 0.09, blue: 0.45))
+                    }
+            }
+            .disabled(timerModel.seconds == 0)
+            .opacity(timerModel.seconds == 0 ? 0.5 : 1)
+            .padding(.top)
+
+
+        }
+        .padding()
+        .frame(maxWidth: .infinity)
+        .background{
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .fill(Color(red: 0.44, green: 0.29, blue: 0.78))
+                .ignoresSafeArea()
+        }
             
     }
+    
+//    //Reuseable Context Menu Option
+//    func ContextMenuOption(maxValue: Int, hint: String, onClick: @escaping (Int) -> ()){
+//        ForEach(0...maxValue, id: \.self){ value in
+//            Button("\(value) \(hint)"){
+//                onClick(value)
+//            }
+//        }
+    
+    @ViewBuilder
+    func ContextMenuOption(maxValue: Int, hint: String, onClick: @escaping (Int) -> ()) -> some View {
+        ForEach(0...maxValue, id: \.self) { value in
+            Button("\(value) \(hint)") {
+                onClick(value)
+            }
+        }
+    }
+
 }
 
 struct Home_Previews: PreviewProvider {
