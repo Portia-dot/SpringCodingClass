@@ -57,7 +57,7 @@ struct Home: View {
                         }
                         Text(timerModel.timerStringValue)
                             .font(.system(size: 45, weight:  .light))
-                            .rotationEffect(.init(degrees: -90))
+                            .rotationEffect(.init(degrees: 90))
                             .animation(.none, value: timerModel.progress)
                         }
                     .padding(60)
@@ -68,12 +68,17 @@ struct Home: View {
                     
                     Button {
                         if timerModel.isStarted{
+                            timerModel.stopTimer()
                             
+                            //Remove Notification
+                            
+                            UNUserNotificationCenter.current()
+                                .removeAllPendingNotificationRequests()
                         }else{
                             timerModel.addNewTimer = true
                         }
                     } label: {
-                        Image(systemName: !timerModel.isStarted ? "timer" : "pause")
+                        Image(systemName: !timerModel.isStarted ? "timer" : "stop.fill")
                             .font(.largeTitle.bold())
                         .foregroundColor(.white)
                         .frame(width: 80, height: 80)
@@ -101,6 +106,9 @@ struct Home: View {
                         .opacity(timerModel.addNewTimer ? 0.25 : 0)
                         .onTapGesture {
                             timerModel.addNewTimer = false
+                            timerModel.hour = 0
+                            timerModel.minutes = 0
+                            timerModel.seconds = 0
                         }
                     
                     NewTimerView()
@@ -110,6 +118,21 @@ struct Home: View {
                 .animation(.easeInOut, value: timerModel.addNewTimer)
             }
             .preferredColorScheme(.dark)
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()){
+                _ in
+                if timerModel.isStarted {
+                    timerModel.updateTimer()
+                }
+            }
+            .alert("Congratulations You Did It 😂😂😂",isPresented: $timerModel.isFinised) {
+                Button("Start New", role: .cancel){
+                    timerModel.stopTimer()
+                    timerModel.addNewTimer = true
+                }
+                Button("Close", role: .destructive){
+                    timerModel.stopTimer()
+                }
+            }
         }
     
     
@@ -171,7 +194,7 @@ struct Home: View {
             .padding(.top, 20)
             
             Button {
-                print("Button pressed")
+                timerModel.startTimer()
             } label: {
                 Text("Save")
                     .font(.title3)
